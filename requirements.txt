@@ -1,9 +1,9 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 fastapi
 uvicorn
 python-multipart
 torch
 torchvision
-torchaudio
 opencv-python-headless
 ultralytics
 numpy
@@ -12,6 +12,5 @@ pillow
 timm
 tqdm
 scipy
-matplotlib
 pyyaml
 pandas
