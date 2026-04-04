@@ -14,7 +14,37 @@ A professional, real-time infrastructure assessment dashboard using AI (YOLO11 +
 
 ---
 
-## 🛠️ Technology Stack
+## 🏗️ System Architecture
+
+The project follows a decoupled client-server architecture designed for real-time inference:
+
+```mermaid
+graph TD
+    User([User]) -->|Upload Image| Frontend[React Dashboard]
+    Frontend -->|POST /detect| Backend[FastAPI Server]
+    
+    subgraph AI Pipeline
+        Backend -->|Image Array| YOLO[YOLOv11 Segmentation]
+        Backend -->|Image Array| MiDaS[Intel MiDaS Depth Estimation]
+        
+        YOLO -->|Binary Masks| Processing[Severity Processor]
+        MiDaS -->|Depth Maps| Processing
+    end
+    
+    Processing -->|JSON Results| Backend
+    Backend -->|Detection & Severity Data| Frontend
+    Frontend -->|SVG Overlays| User
+```
+
+1.  **Frontend (React/Vite)**: Handles image selection, canvas rendering, and data visualization. 
+2.  **API Gateway (FastAPI)**: Serves as the interface for handling HTTP requests and managing the AI execution lifecycle.
+3.  **Inference Layer**:
+    *   **YOLOv11** handles the object detection and segmentation to create masks for each pothole.
+    *   **MiDaS** generates a relative depth map to determine how deep each pothole is.
+4.  **Feature Analysis**: The data from both models is fused to calculate area-to-depth ratios and determine real-world severity (High/Medium/Low).
+
+---
+
 
 - **Frontend**: React, Vite, Vanilla CSS (Industrial Dark Mode theme)
 - **Backend**: FastAPI, Uvicorn
