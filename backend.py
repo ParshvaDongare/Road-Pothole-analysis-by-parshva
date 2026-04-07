@@ -68,7 +68,7 @@ async def detect(image: UploadFile = File(...)):
     detection_result = results[0]
 
     # 2. Extract features
-    pothole_data = pipeline.extract_pothole_features(detection_result, image_bgr.shape)
+    pothole_data = pipeline.extract_pothole_features(detection_result, image_bgr)
     
     # 3. Add MiDaS depth
     pothole_data, _ = pipeline.add_depth_information(

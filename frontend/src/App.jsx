@@ -7,7 +7,7 @@ function App() {
   const [results, setResults] = useState(null)
   const canvasRef = useRef(null)
 
-  const API_URL = import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/detect` : 'http://localhost:8080/detect'
+  const API_URL = import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/detect` : 'http://localhost:8000/detect'
 
   const handleDrop = (e) => {
     e.preventDefault()
